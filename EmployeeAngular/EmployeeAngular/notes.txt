@@ -1,0 +1,6 @@
+in pages
+ng g c login
+ng g c layout
+ng g c employee
+ng g c dashboard
+ng g c projectEmployees
