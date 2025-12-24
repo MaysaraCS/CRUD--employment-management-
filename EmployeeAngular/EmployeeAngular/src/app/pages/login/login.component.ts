@@ -20,7 +20,7 @@ export class LoginComponent {
 
   onLogin() {
     debugger;
-    this.http.post("https://localhost:4200/api/EmployeeeManagement/login", this.loginObj).subscribe((res: any) => {
+    this.http.post("https://projectapi.gerasim.in/api/EmployeeManagement/login", this.loginObj).subscribe((res: any) => {
       if(res.result){
         localStorage.setItem('employeeApp', JSON.stringify(res.data));
         this.router.navigateByUrl('dashboard');

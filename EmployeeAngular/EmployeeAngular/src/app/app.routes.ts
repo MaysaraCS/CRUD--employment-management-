@@ -4,6 +4,8 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { Component } from '@angular/core';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EmployeeComponent } from './pages/employee/employee.component';
+import { ProjectComponent } from './pages/project/project.component';
+import { ProjectEmployeesComponent } from './pages/project-employees/project-employees.component';
 
 export const routes: Routes = [
     {
@@ -26,7 +28,15 @@ export const routes: Routes = [
             {
                 path: 'employees',
                 component: EmployeeComponent,
-            }
+            },
+            {
+                path: 'projects',
+                component: ProjectComponent,
+            },
+            {
+                path: 'project-employee',
+                component: ProjectEmployeesComponent,
+            },
         ]
     }
 ];

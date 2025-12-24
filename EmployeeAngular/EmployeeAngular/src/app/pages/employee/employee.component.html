@@ -1,1 +1,200 @@
-<p>employee works!</p>
+<div class="employee-row">
+  <!-- Left Side - Employee Portal Table -->
+  <div [class]="isSidePanelOpen() ? 'col-7' : 'col-12'">
+    <div class="portal-header">
+      <h2 class="portal-title">Employee Portal</h2>
+      <button class="btn-add-new" type="button" (click)="addNew()">
+        Add New
+      </button>
+    </div>
+
+    <div class="table-container">
+      <table class="employee-table">
+        <thead>
+          <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Contact No</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (item of employeeList; track $index) {
+          <tr>
+            <td>{{ item.employeeId }}</td>
+            <td>{{ item.employeeName }}</td>
+            <td>{{ item.contactNo }}</td>
+            <td>{{ item.emailId }}</td>
+            <td>{{ item.depId }}</td>
+            <td>
+              <button class="btn btn-success btn-sm" (click)="onEdit(item)">
+                Edit
+              </button>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="onDelete(item.employeeId)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  @if (isSidePanelOpen()) {
+  <!-- Right Side - New Employee Form -->
+  <div class="form-container">
+    <div class="form-header">
+      <h2 class="form-title">New Employee</h2>
+      <button class="btn-close" type="button" (click)="close()">Close</button>
+    </div>
+
+    <div class="form-content">
+      <form #empForm="ngForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="employeeName" class="form-label">Employee Name</label>
+            <input
+              type="text"
+              id="employeeName"
+              class="form-control"
+              name="employeeName"
+              [(ngModel)]="employeeObj.employeeName"
+              placeholder="Enter employee name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="contactNo" class="form-label">Contact No</label>
+            <input
+              type="text"
+              id="contactNo"
+              class="form-control"
+              name="contactNo"
+              [(ngModel)]="employeeObj.contactNo"
+              placeholder="Enter contact number"
+            />
+          </div>
+        </div>
+
+        <div class="form-row single">
+          <div class="form-group">
+            <label for="emailId" class="form-label">Email</label>
+            <input
+              type="email"
+              id="emailId"
+              class="form-control"
+              name="emailId"
+              [(ngModel)]="employeeObj.emailId"
+              placeholder="Enter email"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="deptId" class="form-label">Parent Department</label>
+            <select
+              id="deptId"
+              name="deptId"
+              class="form-select"
+              [(ngModel)]="deptId"
+              (change)="onDeptChange()"
+            >
+              <option value="">Select department</option>
+              @for (item of parentDeptList; track $index) {
+              <option [value]="item.departmentId">
+                {{ item.departmentName }}
+              </option>
+              }
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="childDeptId" class="form-label">Child Department</label>
+            <select
+              id="childDeptId"
+              name="childDeptId"
+              class="form-select"
+              [(ngModel)]="employeeObj.depId"
+            >
+              <option value="">Select department</option>
+              @for (item of childDeptList; track $index) {
+              <option [value]="item.childDeptId">
+                {{ item.departmentName }}
+              </option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              name="password"
+              [(ngModel)]="employeeObj.password"
+              placeholder="Enter password"
+            />
+          </div>
+        </div>
+
+        <div class="form-row single">
+          <div class="form-group">
+            <label class="form-label">Gender</label>
+
+            <div class="gender-group">
+              <label class="gender-option">
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Male"
+                  [(ngModel)]="employeeObj.gender"
+                />
+                Male
+              </label>
+
+              <label class="gender-option">
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Female"
+                  [(ngModel)]="employeeObj.gender"
+                />
+                Female
+              </label>
+            </div>
+          </div>
+        </div>
+
+        @if (employeeObj.employeeId == 0) {
+        <button
+          type="button"
+          class="btn btn-warning mt-3"
+          (click)="onSaveEmployee()"
+        >
+          Submit
+        </button>
+        } @else {
+        <button
+          type="button"
+          class="btn btn-primary mt-3"
+          (click)="onUpdateEmployee()"
+        >
+          Update
+        </button>
+        }
+      </form>
+    </div>
+  </div>
+  }
+</div>

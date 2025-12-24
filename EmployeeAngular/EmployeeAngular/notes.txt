@@ -3,4 +3,9 @@ ng g c login
 ng g c layout
 ng g c employee
 ng g c dashboard
+ng g c project
 ng g c projectEmployees
+
+in services
+ng g s master
+ng g s employee
