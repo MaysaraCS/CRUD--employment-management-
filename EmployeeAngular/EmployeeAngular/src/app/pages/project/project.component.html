@@ -1,1 +1,163 @@
-<p>project works!</p>
+<div class="employee-row">
+  <!-- Left Side - Project List Table -->
+  <div [class]="currentView !== 'List' ? 'col-7' : 'col-12'">
+    <div class="portal-header">
+      <h2 class="portal-title">Project List</h2>
+      <button class="btn-add-new" type="button" (click)="initializeForm()">
+        Create New Project
+      </button>
+    </div>
+
+    <div class="table-container">
+      <table class="employee-table">
+        <thead>
+          <tr>
+            <th>Project ID</th>
+            <th>Project Name</th>
+            <th>Client Name</th>
+            <th>Start Date</th>
+            <th>Lead By Employee</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let project of projectList; let sr = index">
+            <td>{{ sr + 1 }}</td>
+            <td>{{ project.projectName }}</td>
+            <td>{{ project.clientName }}</td>
+            <td>{{ project.startDate | date : "dd-MMM-yy" }}</td>
+            <td>{{ project.employeeName }}</td>
+            <td>
+              <button class="btn btn-success btn-sm" (click)="onEdit(project)">
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  @if (currentView !== 'List') {
+  <!-- Right Side - New Project Form -->
+  <div class="form-container">
+    <div class="form-header">
+      <h2 class="form-title">New Project</h2>
+      <button class="btn-close" type="button" (click)="currentView = 'List'">
+        Close
+      </button>
+    </div>
+
+    <div class="form-content">
+      <form [formGroup]="projectForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="projectName" class="form-label">Project Name</label>
+            <input
+              type="text"
+              id="projectName"
+              class="form-control"
+              formControlName="projectName"
+              placeholder="Enter project name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="clientName" class="form-label">Client Name</label>
+            <input
+              type="text"
+              id="clientName"
+              class="form-control"
+              formControlName="clientName"
+              placeholder="Enter client name"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input
+              type="date"
+              id="startDate"
+              class="form-control"
+              formControlName="startDate"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="leadByEmpId" class="form-label"
+              >Lead By Employee ID</label
+            >
+            <select class="form-select" formControlName="leadByEmpId">
+              <option value="">Select Employee</option>
+              <option
+                *ngFor="let emp of employeeData$ | async"
+                [value]="emp.employeeId"
+              >
+                {{ emp.employeeName }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contactPerson" class="form-label">Contact Person</label>
+            <input
+              type="text"
+              id="contactPerson"
+              class="form-control"
+              formControlName="contactPerson"
+              placeholder="Enter contact person name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="contactNo" class="form-label">Contact No</label>
+            <input
+              type="text"
+              id="contactNo"
+              class="form-control"
+              formControlName="contactNo"
+              placeholder="Enter contact number"
+            />
+          </div>
+        </div>
+
+        <div class="form-row single">
+          <div class="form-group">
+            <label for="emailId" class="form-label">Email</label>
+            <input
+              type="email"
+              id="emailId"
+              class="form-control"
+              formControlName="emailId"
+              placeholder="Enter email"
+            />
+          </div>
+        </div>
+
+        @if (projectForm.value.projectId == 0) {
+        <button
+          type="button"
+          class="btn btn-warning mt-3"
+          (click)="onSaveProject()"
+        >
+          Submit
+        </button>
+        } @else {
+        <button
+          type="button"
+          class="btn btn-primary mt-3"
+          (click)="onSaveProject()"
+        >
+          Update
+        </button>
+        }
+      </form>
+    </div>
+  </div>
+  }
+</div>
