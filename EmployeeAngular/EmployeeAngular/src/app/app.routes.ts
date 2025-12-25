@@ -6,6 +6,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EmployeeComponent } from './pages/employee/employee.component';
 import { ProjectComponent } from './pages/project/project.component';
 import { ProjectEmployeesComponent } from './pages/project-employees/project-employees.component';
+import { EmployeeDataComponent } from './pages/employee-data/employee-data.component';
 
 export const routes: Routes = [
     {
@@ -34,8 +35,12 @@ export const routes: Routes = [
                 component: ProjectComponent,
             },
             {
-                path: 'project-employee',
+                path: 'project-employee/:eventid',
                 component: ProjectEmployeesComponent,
+            },
+            {
+                path: 'employee-data',
+                component: EmployeeDataComponent,
             },
         ]
     }

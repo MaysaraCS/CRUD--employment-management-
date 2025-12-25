@@ -5,6 +5,7 @@ ng g c employee
 ng g c dashboard
 ng g c project
 ng g c projectEmployees
+ng g c employeeData
 
 in services
 ng g s master

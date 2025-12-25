@@ -1,0 +1,96 @@
+<div class="container py-5">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>Employee Management</h3>
+    <button class="btn btn-primary" (click)="openModal()">Add Employee</button>
+  </div>
+
+  <!-- Employee Table -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>City</th>
+            <th>Address</th>
+            <th width="140">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (item of employeeList; track $index) {
+          <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ item.firstName }} {{ item.lastName }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.contactNo }}</td>
+            <td>{{ item.city }}</td>
+            <td>{{ item.address }}</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-1">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" #empModal tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Employee Form</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Contact No</label>
+              <input type="text" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">City</label>
+              <input type="text" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Address</label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+        <button class="btn btn-success">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;    
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Cors;
 
 namespace Employee.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("allowCors")]
     public class EmployeeMasterController : ControllerBase
     {
         private readonly EmployeeDbContext _context;
