@@ -1,6 +1,6 @@
 <main class="main-login">
   <div class="left-login">
-    <h1>Login<br />And join our team</h1>
+    <h1>Register<br />And join our team</h1>
     <img
       src="https://i.postimg.cc/YC13sX2Z/Astronaut-cuate.png"
       class="left-login-img"
@@ -10,13 +10,23 @@
 
   <div class="right-login">
     <div class="card-login">
-      <h1>Login</h1>
+      <h1>Register</h1>
+
+      <div class="textfield">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          [(ngModel)]="registerObj.username"
+          name="username"
+          placeholder="Username"
+        />
+      </div>
 
       <div class="textfield">
         <label for="email">Email</label>
         <input
           type="email"
-          [(ngModel)]="loginObj.email"
+          [(ngModel)]="registerObj.email"
           name="email"
           placeholder="Email"
         />
@@ -26,17 +36,17 @@
         <label for="password">Password</label>
         <input
           type="password"
-          [(ngModel)]="loginObj.password"
+          [(ngModel)]="registerObj.password"
           name="password"
           placeholder="Password"
         />
       </div>
 
-      <button class="btn-login" (click)="onLogin()">Login</button>
+      <button class="btn-login" (click)="onRegister()">Register</button>
 
       <div>
-        <button class="btn-route" routerLink="/register">
-          Don't have an account? Register
+        <button class="btn-route" routerLink="/login">
+          Already have an account? Login
         </button>
       </div>
     </div>
